@@ -1,11 +1,11 @@
 #!/bin/bash
 
-factorioPath="/opt/factorio"
-factorioBackupPath="/root/backups"
-factorioUDP=34197
-factorioTCP=27015
-factorioDockerName="factorio"
-factorioBackupMaxAge=3
+factorioPath="/opt/factorio"		# factorio server path (Default: /opt/factorio)
+factorioBackupPath="/root/backups"	# directory to store backups in (Default: /root/backups/)
+factorioUDP=34197			# factorio UDP Port (Default: 34197)
+factorioTCP=27015			# factorio TCP Port (Default: 27015)
+factorioDockerName="factorio"		# docker container name (Default: factorio)
+factorioBackupMaxAge=3			# max. age of backups in days (Default: 3)
 
 
 fHelp()
@@ -17,10 +17,10 @@ fHelp()
 		echo "		->stop"
 		echo "		->restart"
 		echo "		->logs"
+		echo "		->backup"
 		echo "		->update [args]"
 		echo "			 ->stable"
 		echo "			 ->latest"
-		echo "		->backup"
 		echo ""
 		echo "Ex. $0 update stable"
 }
