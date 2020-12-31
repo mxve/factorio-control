@@ -4,7 +4,7 @@ factorioPath="/opt/factorio"		# factorio server path (Default: /opt/factorio)
 factorioBackupPath="/root/backups"	# directory to store backups in (Default: /root/backups/)
 factorioUDP=34197			# factorio UDP Port (Default: 34197)
 factorioTCP=27015			# factorio TCP Port (Default: 27015)
-factorioDockerName="factorio"		# docker container name (Default: factorio)
+factorioDockerName="factorio"		# docker container & backup file name (Default: factorio)
 factorioBackupMaxAge=3			# max. age of backups in days (Default: 3)
 
 
@@ -25,6 +25,18 @@ fHelp()
 		echo "Ex. $0 update stable"
 }
 
+fBackup()
+{
+		vDate=$(date +%d-%m-%Y_%H-%M-%S)
+		vFilename=$factorioDockerName_$vDate
+		cd $factorioPath
+		tar cf $vFilename.tar *
+		gzip $vFilename.tar
+		mv $vFilename.tar.gz $factorioBackupPath/
+		echo "Created backup $factorioBackupPath/$vFilename.tar.gz"
+		find $factorioBackupPath/ -mtime +$factorioBackupMaxAge -exec rm {} \;
+}
+
 fUpdate()
 {
 		fBackup
@@ -32,16 +44,6 @@ fUpdate()
 		docker rm $factorioDockerName
 		docker pull factoriotools/factorio:$1
 		docker run -d -p $factorioUDP:$factorioUDP/udp -p $factorioTCP:$factorioTCP/tcp -v $factorioPath:/factorio --name $factorioDockerName --restart=always factoriotools/factorio:$1
-}
-
-fBackup()
-{
-		_DATE=$(date +%d-%m-%Y_%H-%M-%S)
-		cd $factorioPath
-		tar cf factorio_$_DATE.tar *
-		gzip factorio_$_DATE.tar
-		mv factorio_$_DATE.tar.gz $factorioBackupPath/
-		find $factorioBackupPath/ -mtime +$factorioBackupMaxAge -exec rm {} \;
 }
 
 case $1 in
