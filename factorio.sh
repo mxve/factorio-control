@@ -21,7 +21,6 @@ factorioDockerArgs="-d -e PORT=${factorioPort}
 
 # Check wether rcon should be exposed
 if [[ "$factorioRconPort" -gt 0 ]]; then
-	echo "Exposing rcon on tcp port ${factorioRconPort}"
 	factorioDockerArgs="${factorioDockerArgs} 
 						-p ${factorioRconPort}:27015/tcp "
 fi
