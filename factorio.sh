@@ -91,8 +91,8 @@ fUpdate()
 	echo "	Port: 			${factorioPort}"
 	echo "	Rcon port: 		${factorioRconPort}"
 	echo "	Path: 			${factorioPath}"
-	echo "	Backup path: 	${factorioBackupPath}"
-	echo "	Backup max age: ${factorioBackupMaxAge} days"
+	echo "	Backup path: 		${factorioBackupPath}"
+	echo "	Backup max age: 	${factorioBackupMaxAge} days"
 }
 
 case ${1} in
