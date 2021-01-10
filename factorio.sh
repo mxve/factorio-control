@@ -109,7 +109,7 @@ case ${1} in
 		docker stop ${factorioDockerName}
 	;;
 	logs)
-		docker logs ${factorioDockerName}
+		docker logs ${factorioDockerName} --follow
 	;;
 	restart)
 		docker stop ${factorioDockerName}
